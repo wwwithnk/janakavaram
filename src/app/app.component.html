@@ -1,0 +1,84 @@
+<!-- <router-outlet></router-outlet> -->
+
+<div class="layout-container">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="https://www.telugudesam.org/wp-content/uploads/2022/06/telugdesamparty_logo.png" alt="Logo" class="logo">
+      <h2>Janakavaram</h2>
+    </div>
+
+    <!-- <nav class="nav-menu">
+      <a class="nav-item active" routerLink="/dashboard">
+        <i class="material-icons">dashboard</i> Dashboard
+      </a>
+      <a class="nav-item" routerLink="/profile">
+        <i class="material-icons">person</i> User Profile
+      </a>
+    <a class="nav-item" routerLink="/total" routerLinkActive="active">
+    <i class="material-icons">content_paste</i> Total List
+  </a>
+      <a class="nav-item" routerLink="/typography">
+        <i class="material-icons">library_books</i> Typography
+      </a>
+      <a class="nav-item" routerLink="/icons">
+        <i class="material-icons">bubble_chart</i> Icons
+      </a>
+      <a class="nav-item" routerLink="/maps">
+        <i class="material-icons">location_on</i> Maps
+      </a>
+      <a class="nav-item" routerLink="/notifications">
+        <i class="material-icons">notifications</i> Notifications
+      </a>
+    </nav> -->
+  
+<!-- app.component.html or sidebar.component.html -->
+
+<nav class="nav-menu">
+  <a
+    class="nav-item"
+    *ngFor="let item of navItems"
+    [routerLink]="item.route"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    (click)="setPageTitle(item.label)"
+  >
+    <i class="material-icons">{{ item.icon }}</i> {{ item.label }}
+  </a>
+</nav>
+
+</aside>
+
+  <!-- Main Content Area -->
+  <div class="main-content">
+
+    <!-- Header -->
+  <header class="header">
+  <h3 class="page-title">{{pageTitle}}</h3>
+
+  <div class="header-icons">
+    <ng-container *ngFor="let item of headerIcons">
+      <!-- If it is a button -->
+      <button *ngIf="item.isButton" [attr.aria-label]="item.ariaLabel">
+        <i class="material-icons">{{ item.icon }}</i>
+      </button>
+
+      <!-- If it is an icon with optional badge -->
+      <div *ngIf="!item.isButton" class="notification" [attr.aria-label]="item.ariaLabel">
+        <i class="material-icons">{{ item.icon }}</i>
+        <span *ngIf="item.badge" class="badge">{{ item.badge }}</span>
+      </div>
+    </ng-container>
+  </div>
+</header>
+
+
+    <!-- Router outlet or main content -->
+    <div class="content-body">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+</div>
+

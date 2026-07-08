@@ -1,0 +1,212 @@
+<p-card *ngIf="totalList?.length > 0" styleClass="table-card">
+
+  <!-- Header -->
+  <div class="table-header">
+
+    <h2>
+      Total Cards
+    </h2>
+
+    <p-button
+      label="Export to Excel"
+      icon="pi pi-file-excel"
+      severity="success"
+      (onClick)="exportToExcel()">
+    </p-button>
+
+  </div>
+
+
+  <!-- Table -->
+  <p-table
+    [value]="pagedPendingCards"
+    [responsiveLayout]="'scroll'"
+    [tableStyle]="{'min-width':'900px'}"
+    >
+
+    <ng-template pTemplate="header">
+
+      <tr>
+
+        <th>S.No</th>
+
+        <th>RC No</th>
+
+        <th>Family Head</th>
+
+        <th>Scheme</th>
+
+        <th pSortableColumn="Units">Units <p-sortIcon field="Units">
+          </p-sortIcon></th>
+
+
+        <th
+          pSortableColumn="fortifiedRice">
+
+          Fortified Rice (Kgs)
+
+          <p-sortIcon field="fortifiedRice">
+          </p-sortIcon>
+
+        </th>
+
+
+        <th>SUGAR (Pkts)</th>
+
+        <th>
+          Whole Meal Atta (Kgs)
+        </th>
+
+        <th>
+          Redgram Dal (Pkts)
+        </th>
+
+        <th>
+          Ragi (Kgs)
+        </th>
+
+      </tr>
+
+    </ng-template>
+
+
+
+    <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+
+      <tr>
+
+        <td>
+          {{(currentPage-1)*pageSize + rowIndex + 1}}
+        </td>
+
+
+        <td>
+          {{item.rationCardNo}}
+        </td>
+
+
+        <td>
+          {{item.familyHead}}
+        </td>
+
+
+        <td>
+          {{item.Scheme}}
+        </td>
+
+
+        <td>
+          {{item.Units}}
+        </td>
+
+
+        <td>
+          {{item.fortifiedRice}}
+        </td>
+
+
+        <td>
+          {{item.sugar}}
+        </td>
+
+
+        <td>
+          {{item.wholeMealAtta}}
+        </td>
+
+
+        <td>
+          {{item.redgramDal}}
+        </td>
+
+
+        <td>
+          {{item.ragi}}
+        </td>
+
+
+      </tr>
+
+
+    </ng-template>
+
+
+    <!-- Empty message -->
+
+    <ng-template pTemplate="emptymessage">
+
+      <tr>
+        <td colspan="10" class="text-center">
+          No records found
+        </td>
+      </tr>
+
+    </ng-template>
+
+
+  </p-table>
+
+
+
+  <!-- Pagination -->
+
+ <!-- Pagination -->
+<div class="pagination-container">
+
+  <!-- Page Size -->
+  <p-dropdown
+    [options]="pageSizeOptions"
+    [(ngModel)]="pageSize"
+    optionLabel="label"
+    optionValue="value"
+    (onChange)="changePageSize()"
+    placeholder="Rows">
+  </p-dropdown>
+
+
+  <p-button
+    label="First"
+    icon="pi pi-angle-double-left"
+    size="small"
+    (onClick)="goToPage(1)"
+    [disabled]="currentPage===1">
+  </p-button>
+
+
+  <p-button
+    label="Previous"
+    icon="pi pi-angle-left"
+    size="small"
+    (onClick)="goToPage(currentPage-1)"
+    [disabled]="currentPage===1">
+  </p-button>
+
+
+  <span>
+    Page {{currentPage}} of {{totalPages}}
+  </span>
+
+
+  <p-button
+    label="Next"
+    icon="pi pi-angle-right"
+    iconPos="right"
+    size="small"
+    (onClick)="goToPage(currentPage+1)"
+    [disabled]="currentPage===totalPages">
+  </p-button>
+
+
+  <p-button
+    label="Last"
+    icon="pi pi-angle-double-right"
+    iconPos="right"
+    size="small"
+    (onClick)="goToPage(totalPages)"
+    [disabled]="currentPage===totalPages">
+  </p-button>
+
+</div>
+
+
+</p-card>

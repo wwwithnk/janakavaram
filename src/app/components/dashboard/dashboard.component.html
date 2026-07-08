@@ -1,0 +1,52 @@
+<div>
+<input type="file" (change)="onFileChange($event)" accept=".xlsx,.xls" />
+
+<div *ngIf="pendingCards.length === 0">
+  No unmatched records found.
+</div>
+  <button *ngIf="pendingCards" (click)="exportToExcel()" style="margin-left: auto;margin-right: 5px;">
+    Export to Excel
+  </button>
+<p-table *ngIf="pendingCards.length"
+  [value]="pendingCards"
+  [paginator]="true"
+  [rows]="100"
+  [rowsPerPageOptions]="[10, 20, 50, 100, 150, 200]"
+  sortMode="multiple"
+  responsiveLayout="scroll"
+>
+  <ng-template pTemplate="header">
+    <tr>
+          <th >
+        S No 
+      </th>
+      <th pSortableColumn="rationCardNo">
+        RC No <p-sortIcon field="rationCardNo"></p-sortIcon>
+      </th>
+
+      <th pSortableColumn="Scheme">
+        Scheme <p-sortIcon field="Scheme"></p-sortIcon>
+      </th>
+
+      <th pSortableColumn="Units">
+        Units <p-sortIcon field="Units"></p-sortIcon>
+      </th>
+
+      <th pSortableColumn="familyHead">
+        Family Head <p-sortIcon field="familyHead"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
+    <tr>
+  <td>{{ rowIndex + 1 }}</td>
+      <td>{{ row.rationCardNo }}</td>
+      <td>{{ row.Scheme }}</td>
+      <td>{{ row.Units }}</td>
+      <td>{{ row.familyHead }}</td>
+    </tr>
+  </ng-template>
+</p-table>
+</div>
+
